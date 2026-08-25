@@ -135,3 +135,10 @@ Upon first startup, the database automatically seeds default credentials:
 - **Backend**: C# 12, ASP.NET Core 8, Entity Framework Core 8, Npgsql PostgreSQL Provider, JWT Bearer Authentication, PasswordHasher.
 - **Frontend**: TypeScript, React 18, Vite 8, Tailwind CSS v4, Lucide Icons, Axios.
 - **Deployment**: Docker, Nginx, Docker Compose.
+
+
+## 🔑 Default Credentials Seeded in Repository
+Super Administrator: Username admin | Password Admin123!
+Consultant Physician: Username dr.kamran | Password Doctor123!
+Head Nurse: Username nurse.amina | Password Nurse123!
+Billing Cashier: Username cashier.kamran | Password Cashier123!
