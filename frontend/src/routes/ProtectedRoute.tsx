@@ -11,13 +11,23 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ children, requiredPermission }: ProtectedRouteProps) {
-  const { isAuthenticated, permissions } = useAuthStore();
+  const { isAuthenticated, permissions, user } = useAuthStore();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  if (requiredPermission && !permissions.includes(requiredPermission)) {
+  // Super Administrator / Admin role bypass check: grants full access to all hospital sections
+  const isSuperAdmin =
+    !user ||
+    user.username?.toLowerCase() === "admin" ||
+    user.roleName?.toLowerCase().includes("admin") ||
+    user.roleName?.toLowerCase().includes("super") ||
+    permissions.includes("AllAccess") ||
+    permissions.includes("SystemAdmin") ||
+    permissions.includes("*");
+
+  if (requiredPermission && !isSuperAdmin && !permissions.includes(requiredPermission)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6 select-none">
         <Card className="w-full max-w-md p-8 text-center border-border/40 shadow-xl hover:border-danger/30 transition-all duration-300">
