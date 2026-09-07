@@ -109,7 +109,16 @@ export default function LoginPage() {
               ))}
             </div>
             <p className="text-primary-400 text-xs">
-              © 2026 CuraSphere HMS. All rights reserved.
+              Develop by Uzaii (
+              <a
+                href="https://www.linkedin.com/in/uzair-ahmad-58007a266/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white transition-colors"
+              >
+                linkedin.com/in/uzair-ahmad-58007a266
+              </a>
+              )
             </p>
           </div>
         </div>
