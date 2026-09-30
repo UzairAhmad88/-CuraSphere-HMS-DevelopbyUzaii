@@ -72,7 +72,7 @@ public class ReportsService : IReportsService
     public async Task<IEnumerable<UserAccountManagementDto>> GetUserAccountsAsync(string? search)
     {
         var query = _context.UserAccounts
-            .Include(u => u.Employee)
+            .Include(u => u.Employee!)
                 .ThenInclude(e => e.Department)
             .Include(u => u.Role)
             .AsNoTracking()
@@ -83,9 +83,9 @@ public class ReportsService : IReportsService
             var term = search.ToLower();
             query = query.Where(u => 
                 u.Username.ToLower().Contains(term) ||
-                u.Role.RoleName.ToLower().Contains(term) ||
-                u.Employee.FirstName.ToLower().Contains(term) ||
-                u.Employee.LastName.ToLower().Contains(term));
+                (u.Role != null && u.Role.RoleName.ToLower().Contains(term)) ||
+                (u.Employee != null && u.Employee.FirstName.ToLower().Contains(term)) ||
+                (u.Employee != null && u.Employee.LastName.ToLower().Contains(term)));
         }
 
         var list = await query.ToListAsync();
