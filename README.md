@@ -83,8 +83,17 @@ CuraSphere HMS is built using modern **Clean Architecture** (.NET 8) combined wi
 
 ### Running Locally
 
-#### 1. Start Database Server
-Ensure PostgreSQL 16 is running on port `5432` with database `curasphere`.
+#### 1. Start Database Server (Local or Supabase)
+Ensure PostgreSQL 16 is running on port `5432` with database `curasphere`, or configure Supabase PostgreSQL.
+
+##### ⚡ Connecting to Supabase PostgreSQL
+To connect CuraSphere HMS to Supabase:
+1. Retrieve your Supabase connection string from project settings (**Settings -> Database -> Connection string -> Session / Transaction Pooler**).
+2. Set `ConnectionStrings:DefaultConnection` in `backend/CuraSphere.Api/appsettings.json` or pass via environment variable:
+   ```text
+   ConnectionStrings__DefaultConnection="Host=aws-0-[region].pooler.supabase.com;Port=6543;Database=postgres;Username=postgres.[project-ref];Password=[your-password];SSL Mode=Require;Trust Server Certificate=true"
+   ```
+3. When launched, `CuraSphere.Api` will automatically apply EF Core migrations and seed default hospital master data to your Supabase PostgreSQL database.
 
 #### 2. Start Backend API (.NET 8)
 ```bash
